@@ -1,0 +1,44 @@
+
+version = '1.0'
+apply plugin:"java"
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle demo',
+                'Implementation-Version': version,
+                'Main-Class': 'Question1.Question1Main'
+    }
+}
+task UberFatJar(type:Jar) {
+            manifest {
+                attributes('Main-Class': 'Question1.Question1Main')
+            }
+            baseName = 'FatJar'
+            from { configurations.compile.collect { zipTree it } }
+            with jar
+        }
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java','src/main/java2']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+
+            exclude 'file.txt'
+        }
+    }
+}
+/*
+Question5: Find a maven repository and add it as a repository. You can use bintray, jcenter
+ */
+repositories {
+    jcenter()
+}
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'}
+
+/*
+Question6: Write a task in file "mytasks.gradle" and use it in your build.gradle
+ */
+apply from: "./src/main/java/Question6/mytasks.gradle"

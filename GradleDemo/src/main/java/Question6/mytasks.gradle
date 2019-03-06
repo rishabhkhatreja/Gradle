@@ -1,0 +1,6 @@
+/*
+Write a task in file "mytasks.gradle" and use it in your build.gradle
+ */
+task hello{
+    println "hello jvghjgjhgjh"
+}
